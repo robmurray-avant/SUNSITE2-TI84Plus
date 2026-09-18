@@ -136,7 +136,7 @@ Refraction becomes rapidly larger and less predictable as altitude falls. The pr
 
 Bowditch notes that temperature inversions, fronts, squalls, differences between sea and air temperature and layered air can all produce abnormal refraction. Near the horizon, even a mathematically excellent ephemeris cannot remove that uncertainty.
 
-**Human-readable citation:** National Geospatial-Intelligence Agency, *The American Practical Navigator (Bowditch)*, Pub. No. 9, 2024 edition, Vol. II, §605, “Astronomical Refraction,” p. 250. Official publication page: https://msi.nga.mil/Publications/APN
+National Geospatial-Intelligence Agency, *The American Practical Navigator (Bowditch)*, Pub. No. 9, 2024 edition, Vol. II, §605, “Astronomical Refraction,” p. 250. Official publication page: https://msi.nga.mil/Publications/APN
 
 The LOW SUN warning therefore means exactly what it says: the result may still be useful, but it deserves less confidence than a sight taken at a healthier altitude.
 
