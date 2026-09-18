@@ -6,7 +6,7 @@ It is an experimental successor to [SUNSIGHT](https://github.com/robmurray-avant
 
 **Development release: v0.1.0 — 2026-09-17**
 
-The current program occupies **7,216 bytes on the calculator**. On a physical plain TI-84 Plus, execution time is not perceptibly different from SUNSIGHT.
+The current program occupies **7,216 bytes on the calculator**. The downloadable `SUNSITE2.8xp` file is **7,275 bytes** including TI file-format overhead. On a physical plain TI-84 Plus, execution time is not perceptibly different from SUNSIGHT.
 
 SUNSITE2 is deliberately Sun-only.
 
@@ -44,6 +44,14 @@ The program currently accepts **1900 through 2049**.
 
 That limit is presently imposed mainly by the ΔT implementation and validation range, not by VSOP87D itself. A wider supported date range is planned for testing.
 
+## Download and install
+
+Use **[SUNSITE2.8xp](SUNSITE2.8xp)** for installation with TI Connect CE.
+
+The human-readable [SUNSITE2.txt](SUNSITE2.txt) is provided for inspection and documentation, not as the preferred installation method.
+
+See [docs/INSTALL.md](docs/INSTALL.md) for details.
+
 ## Inputs
 
 SUNSITE2 asks for:
@@ -70,7 +78,7 @@ Warnings are displayed for:
 
 ## Physical-calculator validation
 
-The current source has been loaded and run on a **plain monochrome TI-84 Plus**.
+The current source and `.8xp` build have been run on a **plain monochrome TI-84 Plus**.
 
 Historical regression status:
 
@@ -83,6 +91,7 @@ See [docs/test-cases.md](docs/test-cases.md) for the full inputs and validation 
 
 ## Repository contents
 
+- [SUNSITE2.8xp](SUNSITE2.8xp) — tested TI-84 Plus calculator program for transfer with TI Connect CE
 - [SUNSITE2.txt](SUNSITE2.txt) — human-readable TI-BASIC source
 - [docs/INSTALL.md](docs/INSTALL.md) — installation notes
 - [docs/test-cases.md](docs/test-cases.md) — historical validation cases and current hardware status
@@ -92,8 +101,6 @@ See [docs/test-cases.md](docs/test-cases.md) for the full inputs and validation 
 - [CHANGELOG.md](CHANGELOG.md) — development history
 - [LICENSE](LICENSE) — MIT License for SUNSITE2 code
 - [COPYRIGHT.md](COPYRIGHT.md) — repository copyright scope
-
-An installable `.8xp` file will be added once the current development build is ready to publish as a downloadable calculator program.
 
 ## Status
 
@@ -105,7 +112,6 @@ The solar model is intentionally more accurate than necessary for normal sextant
 2. validate the truncated VSOP87D model over a wider range of dates
 3. determine a defensible expanded year range
 4. document numerical accuracy against a high-precision reference
-5. publish the tested `.8xp` build
 
 ## Disclaimer
 
