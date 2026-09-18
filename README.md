@@ -76,6 +76,30 @@ The additional astronomical precision is smaller than many ordinary observationa
 
 If you want the fuller history, design decisions, validation work and practical reasoning behind this project, read the [SUNSIGHT repository](https://github.com/robmurray-avant/SUNSIGHT-TI84Plus) in detail first. SUNSITE2 deliberately builds on that work rather than repeating all of it here.
 
+## Accuracy in context: ephemeris versus practical LOP
+
+It is useful to separate two different questions:
+
+1. **How accurately does the method calculate the Sun's position?**
+2. **How accurately will a real sextant sight place the line of position (LOP)?**
+
+One minute of altitude corresponds to approximately one nautical mile along the intercept direction. But once ephemeris error is below a few tenths of an arcminute, the dominant errors in a real marine sight are usually the observation itself: sextant reading, horizon quality, vessel motion, exact timing, index error, dip and atmospheric refraction.
+
+| Method | Ephemeris / solar-position accuracy | Typical contribution to LOP error | Practical Sun LOP from a good small-boat sight |
+|---|---:|---:|---:|
+| **Murdoch TI-81** | about **1′ class** overall, often better in individual cases | about **≤1 NM** | about **1–2 NM** |
+| **SUNSIGHT** | about **0.2–0.5′ class** in documented testing | about **0.2–0.5 NM** | about **1–2 NM** |
+| **SUNSITE2** | about **0.02–0.1′ class** over the present tested range | about **0.02–0.1 NM** | still about **1–2 NM** |
+| **Standard Nautical Almanac method** | Sun GHA and declination published to **0.1′**; underlying ephemeris is better | about **0.1 NM or less** from the tabulated ephemeris itself | about **1–2 NM** |
+
+The comparison is deliberately approximate. It is intended to show scale, not to imply that every sight will fall inside those bands.
+
+Murdoch's method is already useful for practical marine navigation. SUNSIGHT reduces the astronomical error substantially and is already comfortably within ordinary sextant accuracy. SUNSITE2 reduces it further, into a range where the improvement is mostly hidden by observational and atmospheric error.
+
+The standard *Nautical Almanac* is the authoritative navigational reference. Its published Sun GHA and declination are given to **0.1′**, which is already finer than most hand-held marine sextant work can exploit.
+
+That is why **SUNSIGHT is already good enough for practical navigation**, and why SUNSITE2 is best viewed as an experiment in compact ephemeris accuracy rather than a necessary operational upgrade.
+
 ## Why VSOP87D?
 
 VSOP stands for **Variations Séculaires des Orbites Planétaires** — literally, *Secular Variations of the Planetary Orbits*. VSOP87 is a modern analytical theory of planetary motion developed by P. Bretagnon and G. Francou. VSOP87D is the version that expresses planetary positions in heliocentric spherical coordinates of date.
