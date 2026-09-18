@@ -14,4 +14,6 @@ Initial development repository for SUNSITE2.
 - Physical TI-84 Plus testing:
   - Case A passes: **11.4 To, Zn 282.8°**, with expected LOW SUN warning.
   - Case B passes: **24.0 To, Zn 5.8°**.
+  - Case D passes: **0.7 From, Zn 234.3°**.
+  - Case C remains to be physically rechecked.
 - Wider date-range testing is planned before the year limits are expanded.
