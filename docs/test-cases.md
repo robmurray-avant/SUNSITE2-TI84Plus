@@ -68,7 +68,7 @@ Predicted SUNSITE2 result:
 
 **13.0 NM To, Zn 89.8°**
 
-### Case D — predicted current result
+### Case D — physical TI-84 Plus PASS
 
 - Date: 1994-11-28
 - UTC: 01:10:14
@@ -80,14 +80,20 @@ Predicted SUNSITE2 result:
 - Pressure: 1030 mb
 - Temperature: 34 °C
 
-Predicted SUNSITE2 result:
+SUNSITE2 result:
 
 **0.7 NM From, Zn 234.3°**
 
+Representative internal values:
+
+- GHA ≈ 200°37.025′
+- Dec ≈ S 21°13.881′
+- Hc ≈ 25°49.682′
+
 ## Status
 
-Cases A and B have been confirmed on a physical plain TI-84 Plus.
+Cases **A, B and D** have been confirmed on a physical plain TI-84 Plus.
 
-Cases C and D remain to be physically rechecked for this development repository.
+Case C remains to be physically rechecked for this development repository.
 
 A wider modern and historical numerical validation suite will be added as the VSOP87D date-range testing proceeds.
