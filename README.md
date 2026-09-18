@@ -84,7 +84,7 @@ Historical regression status:
 
 - **Case A — PASS:** 11.4 NM To, Zn 282.8°, with expected LOW SUN warning
 - **Case B — PASS:** 24.0 NM To, Zn 5.8°
-- **Case C — awaiting physical recheck**
+- **Case C — PASS:** 13.0 NM To, Zn 89.8°
 - **Case D — PASS:** 0.7 NM From, Zn 234.3°
 
 See [docs/test-cases.md](docs/test-cases.md) for the full inputs and validation notes.
