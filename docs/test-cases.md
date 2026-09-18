@@ -52,7 +52,7 @@ Representative internal values:
 - Dec ≈ N 23°26.035′
 - Hc ≈ 49°59.209′
 
-### Case C — predicted current result
+### Case C — physical TI-84 Plus PASS
 
 - Date: 1992-03-18
 - UTC: 22:00:00
@@ -64,9 +64,15 @@ Representative internal values:
 - Pressure: 970 mb
 - Temperature: 40 °C
 
-Predicted SUNSITE2 result:
+SUNSITE2 result:
 
 **13.0 NM To, Zn 89.8°**
+
+Representative internal values:
+
+- GHA ≈ 148°01.819′
+- Dec ≈ S 0°34.371′
+- Hc ≈ 75°42.959′
 
 ### Case D — physical TI-84 Plus PASS
 
@@ -92,8 +98,8 @@ Representative internal values:
 
 ## Status
 
-Cases **A, B and D** have been confirmed on a physical plain TI-84 Plus.
+Cases **A, B, C and D** have all been confirmed on a physical plain TI-84 Plus.
 
-Case C remains to be physically rechecked for this development repository.
+The historical regression set therefore passes 4/4 on hardware.
 
 A wider modern and historical numerical validation suite will be added as the VSOP87D date-range testing proceeds.
