@@ -7,6 +7,7 @@ Initial development repository for SUNSITE2.
 - Program name: `SUNSITE2`.
 - Target: plain monochrome TI-84 Plus.
 - Calculator size: **7,216 bytes**.
+- Installable TI file: **`SUNSITE2.8xp`**, 7,275 bytes including file-format overhead.
 - Current supported range: **1900–2049**.
 - Replaces SUNSIGHT's compact solar ephemeris with a heavily truncated VSOP87D-based Earth model.
 - Retains SUNSIGHT's sight-reduction sequence, refined Bennett refraction, semidiameter, parallax, warnings and user interface.
