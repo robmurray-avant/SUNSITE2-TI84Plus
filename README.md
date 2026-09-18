@@ -78,7 +78,7 @@ If you want the fuller history, design decisions, validation work and practical 
 
 ## Why VSOP87D?
 
-VSOP87 is a modern analytical theory of planetary motion. VSOP87D expresses planetary positions in heliocentric spherical coordinates of date.
+VSOP stands for **Variations Séculaires des Orbites Planétaires** — literally, *Secular Variations of the Planetary Orbits*. VSOP87 is a modern analytical theory of planetary motion developed by P. Bretagnon and G. Francou. VSOP87D is the version that expresses planetary positions in heliocentric spherical coordinates of date.
 
 For the Sun, SUNSITE2 calculates a truncated heliocentric position of the Earth and then obtains the Sun's geocentric ecliptic longitude by adding 180°.
 
@@ -134,7 +134,9 @@ Refraction becomes rapidly larger and less predictable as altitude falls. The pr
 
 > “The atmosphere contains many irregularities which are erratic in their influence upon refraction.”
 
-Bowditch notes that temperature inversions, fronts, squalls, differences between sea and air temperature and layered air can all produce abnormal refraction. Near the horizon, even a mathematically excellent ephemeris cannot remove that uncertainty. citeturn638532search7
+Bowditch notes that temperature inversions, fronts, squalls, differences between sea and air temperature and layered air can all produce abnormal refraction. Near the horizon, even a mathematically excellent ephemeris cannot remove that uncertainty.
+
+**Human-readable citation:** National Geospatial-Intelligence Agency, *The American Practical Navigator (Bowditch)*, Pub. No. 9, 2024 edition, Vol. II, §605, “Astronomical Refraction,” p. 250. Official publication page: https://msi.nga.mil/Publications/APN
 
 The LOW SUN warning therefore means exactly what it says: the result may still be useful, but it deserves less confidence than a sight taken at a healthier altitude.
 
@@ -142,7 +144,7 @@ The LOW SUN warning therefore means exactly what it says: the result may still b
 
 As the Sun approaches the zenith, azimuth changes very rapidly with small changes in position and time. The altitude can remain useful, but Zn becomes increasingly sensitive and should be treated cautiously.
 
-Bowditch likewise notes the special geometry when a body passes through or very near the zenith and the unusual behaviour of azimuth in that region. citeturn638532search4
+The near-zenith warning is a geometric caution rather than a refraction warning. As altitude approaches 90°, azimuth becomes increasingly sensitive to small changes in time, position and measured altitude. This is also reflected in NGA sight-reduction guidance, which requires special interpolation procedures close to the zenith.
 
 ### INT >25 NM — large intercept
 
@@ -155,6 +157,25 @@ SUNSITE2 therefore advises:
 The purpose is practical: use a more suitable assumed position and check the sight data rather than blindly plotting a very large intercept.
 
 These are **navigation cautions, not calculation-error messages**.
+
+### Bowditch citation — machine-readable form
+
+For citation managers and automated tools, the Bowditch source used above can be represented as BibTeX:
+
+```bibtex
+@book{NGA_Bowditch_2024,
+  author    = {{National Geospatial-Intelligence Agency}},
+  title     = {The American Practical Navigator (Bowditch)},
+  year      = {2024},
+  volume    = {2},
+  number    = {9},
+  publisher = {National Geospatial-Intelligence Agency},
+  note      = {Section 605, Astronomical Refraction, p. 250},
+  url       = {https://msi.nga.mil/Publications/APN}
+}
+```
+
+The official NGA publication page is preferable to a copied third-party PDF because NGA maintains the digital edition continuously.
 
 ## Physical-calculator validation
 
