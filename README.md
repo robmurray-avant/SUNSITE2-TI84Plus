@@ -72,37 +72,12 @@ Warnings are displayed for:
 
 The current source has been loaded and run on a **plain monochrome TI-84 Plus**.
 
-### Case A
+Historical regression status:
 
-Inputs:
-
-- 8 Apr 1950
-- 18:43:28 UTC
-- N 62°28.2′, E 000°18.8′
-- Hs 1°38.2′ lower limb
-- index error 10.2′ off arc
-- eye height 2.2 m
-- pressure 1050 mb
-- temperature 2 °C
-
-Result:
-
-```text
-Int NM 11.4 To
-Zn     282.8
-
-LOW SUN
-USE WITH CAUTION
-```
-
-### Case B
-
-The historical Case B also **passes on the physical TI-84 Plus** and agrees with the expected result:
-
-```text
-Int NM 24.0 To
-Zn     5.8
-```
+- **Case A — PASS:** 11.4 NM To, Zn 282.8°, with expected LOW SUN warning
+- **Case B — PASS:** 24.0 NM To, Zn 5.8°
+- **Case C — awaiting physical recheck**
+- **Case D — PASS:** 0.7 NM From, Zn 234.3°
 
 See [docs/test-cases.md](docs/test-cases.md) for the full inputs and validation notes.
 
