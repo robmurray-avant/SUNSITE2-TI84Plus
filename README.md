@@ -142,9 +142,19 @@ The LOW SUN warning therefore means exactly what it says: the result may still b
 
 ### SUN NEAR ZENITH — corrected altitude above 87°
 
-As the Sun approaches the zenith, azimuth changes very rapidly with small changes in position and time. The altitude can remain useful, but Zn becomes increasingly sensitive and should be treated cautiously.
+The near-zenith warning is mainly a geometry and plotting caution, not a refraction warning. As the Sun approaches the zenith, azimuth can change very rapidly and the circle of equal altitude becomes too tightly curved to be represented well by an ordinary straight line of position.
 
-The near-zenith warning is a geometric caution rather than a refraction warning. As altitude approaches 90°, azimuth becomes increasingly sensitive to small changes in time, position and measured altitude. This is also reflected in NGA sight-reduction guidance, which requires special interpolation procedures close to the zenith.
+Bowditch states:
+
+> “It is not always easy to determine the azimuth accurately, and when near the zenith, a body may be changing azimuth rapidly.”
+
+It also warns that for a body near the zenith:
+
+> “the use of a straight line to approximate the circle may introduce serious error.”
+
+The current SUNSITE2 threshold of 87° corresponds closely to Bowditch's further guidance that within about three degrees of the zenith the circle of position should be plotted as a circle rather than treated as a straight LOP.
+
+National Geospatial-Intelligence Agency, *The American Practical Navigator (Bowditch)*, Pub. No. 9, 2024 edition, Vol. I, §2011, “High Altitude Sights,” pp. 362–364. Official publication page: [https://msi.nga.mil/Publications/APN](https://msi.nga.mil/Publications/APN)
 
 ### INT >25 NM — large intercept
 
@@ -157,25 +167,6 @@ SUNSITE2 therefore advises:
 The purpose is practical: use a more suitable assumed position and check the sight data rather than blindly plotting a very large intercept.
 
 These are **navigation cautions, not calculation-error messages**.
-
-### Bowditch citation — machine-readable form
-
-For citation managers and automated tools, the Bowditch source used above can be represented as BibTeX:
-
-```bibtex
-@book{NGA_Bowditch_2024,
-  author    = {{National Geospatial-Intelligence Agency}},
-  title     = {The American Practical Navigator (Bowditch)},
-  year      = {2024},
-  volume    = {2},
-  number    = {9},
-  publisher = {National Geospatial-Intelligence Agency},
-  note      = {Section 605, Astronomical Refraction, p. 250},
-  url       = {https://msi.nga.mil/Publications/APN}
-}
-```
-
-The official NGA publication page is preferable to a copied third-party PDF because NGA maintains the digital edition continuously.
 
 ## Physical-calculator validation
 
