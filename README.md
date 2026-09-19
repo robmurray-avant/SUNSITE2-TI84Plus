@@ -1,143 +1,137 @@
 # SUNSITE2 for the TI-84 Plus
 
-SUNSITE2 is a Sun-sight reduction program for the **plain monochrome Texas Instruments TI-84 Plus**.
+SUNSITE2 is an experimental Sun-sight reduction program for the **plain monochrome Texas Instruments TI-84 Plus**.
 
-It is an experimental successor to [SUNSIGHT](https://github.com/robmurray-avant/SUNSIGHT-TI84Plus). It retains SUNSIGHT's practical marine sight-reduction workflow, refined Bennett refraction, safeguards and simple interface, but replaces the earlier compact solar ephemeris with a **heavily truncated VSOP87D-based Earth model** optimized specifically for Sun sights.
+It is a successor to [SUNSIGHT](https://github.com/robmurray-avant/SUNSIGHT-TI84Plus). It keeps the same practical marine sight-reduction approach but replaces SUNSIGHT's compact solar ephemeris with a **heavily truncated VSOP87D-based Earth model** optimized for Sun sights on a small calculator.
 
 > **DO NOT USE SUNSITE2 FOR NAVIGATION YET.**
 >
-> The program is still under development. The historical A–D regression cases pass on a physical TI-84 Plus, but the wider date-range and independent validation work is not complete. Until that testing is finished, use this repository for evaluation and development only.
+> The current calculator build passes the historical A-D regression cases on a physical TI-84 Plus and its ephemeris has now been tested numerically across 1900-2049. However, the program still carries several input-validation limitations inherited from the earlier development shell. Those should be corrected and the resulting build re-tested on hardware before SUNSITE2 is treated as an operational navigation program.
 
-**Development release: v0.1.0 — 2026-09-17**
+**Development build: v0.1.0**
 
-The current program occupies **7,216 bytes on the calculator**. The downloadable `SUNSITE2.8xp` file is **7,275 bytes** including TI file-format overhead. On a physical plain TI-84 Plus, execution time is not perceptibly different from SUNSIGHT.
+Current tested calculator program:
+
+- on-calculator size: **7,216 bytes**
+- `SUNSITE2.8xp` file size: **7,275 bytes**
+- SHA-256: **`daad8997b61b4161bc5d6986ece2da19c7bd47b84fc79982fc522673767bdaea`**
+- internal calculator program name: **`SUNSITE2`**
+
+The installable `.8xp` file is the physical-calculator-tested build. `SUNSITE2.txt` is a human-readable rendering of that build and is supplied for inspection and documentation, not as the preferred installation method.
 
 SUNSITE2 is deliberately Sun-only.
 
-## Where SUNSITE2 came from
+## Where SUNSITE2 fits after SUNSIGHT v1.1
 
-SUNSITE2 is the third step in a line of small-calculator Sun-sight programs.
+SUNSITE2 was started before the final SUNSIGHT v1.1 ephemeris work was complete. That matters when comparing the two programs.
 
-### 1. Murdoch's 1996 TI-81 program
+SUNSIGHT v1.1 kept its compact Meeus-style architecture and added eight small VSOP87D-derived periodic longitude terms. That reduced the broad 1900-2049 GHA RMS error to about **0.059′**, with a maximum of about **0.196′**.
 
-William S. **Murdoch's** 1996 *Cruising World* article, “Create Your Own Sun-Sight Reduction Program,” demonstrated that a complete Sun ephemeris and sight-reduction system could be fitted into a TI-81.
+SUNSITE2 goes farther and replaces the compact solar longitude model with a severe truncation of the VSOP87D Earth series. In the same 27,394-epoch numerical test used for SUNSIGHT v1.1, SUNSITE2 gives about:
 
-Murdoch used low-precision solar formulae derived from the work of **Van Flandern and Pulkkinen**, arranged for practical solar-coordinate calculation by **B. Emerson** of HM Nautical Almanac Office.
+| Model | GHA RMS | GHA max | Dec RMS | Dec max |
+|---|---:|---:|---:|---:|
+| SUNSIGHT v1.0 | 0.201′ | 0.618′ | 0.059′ | 0.227′ |
+| **SUNSIGHT v1.1** | **0.059′** | **0.196′** | **0.019′** | **0.073′** |
+| **SUNSITE2 v0.1** | **0.030′** | **0.100′** | **0.013′** | **0.040′** |
 
-His complete program occupied only **2,259 bytes**.
+The broad test evaluates apparent geocentric solar coordinates every two days at 12:00 from 1900-01-01 through 2049-12-31 against Swiss Ephemeris: **27,394 epochs**.
 
-For its size and the calculator available in 1996, it was an extraordinary achievement. The resulting solar positions are much better than the phrase “low precision” might suggest. In the historical test cases the astronomical solution is already quite close to modern reference values.
+Relative to SUNSIGHT v1.1, the current SUNSITE2 ephemeris reduces:
 
-Its principal merit is elegant economy: a useful self-contained Sun ephemeris and sight reducer in an extraordinarily small program.
+- GHA RMS error by about **50%**
+- maximum GHA error by about **49%**
+- declination RMS error by about **34%**
+- maximum declination error by about **45%**
 
-### 2. SUNSIGHT
+The cost is modest. The tested SUNSITE2 build occupies **7,216 bytes** on the calculator versus **6,997 bytes** for SUNSIGHT v1.1: an increase of **219 bytes**, about **3.1%**.
 
-[SUNSIGHT](https://github.com/robmurray-avant/SUNSIGHT-TI84Plus) was an independent modern implementation of the same practical idea for the plain TI-84 Plus.
+That is a technically interesting result. It is not evidence that a real marine sextant sight will improve by the same amount.
 
-It replaced Murdoch's older solar model with a compact **Meeus-style** ephemeris and added:
+## Accuracy in context
 
-- ΔT handling
-- refined Bennett refraction with entered pressure and temperature
-- modern semidiameter and parallax treatment
-- clearer data entry
-- numerical safeguards
-- input validation
-- warning messages
-- extensive comparison with historical cases and USNO data
+There are two different questions:
 
-SUNSIGHT occupies about **6.8 kB** on the calculator.
+1. How accurately does the program calculate the Sun's position?
+2. How accurately does a real sight establish a line of position?
 
-Its astronomical accuracy is already substantially better than is required for ordinary marine sextant work. In its documented modern USNO validation suite, the largest displayed difference in calculated altitude Hc was about **0.5 minute of arc**, with historical A–D results closer still.
+Once the ephemeris error is below a few tenths of an arcminute, the observation normally dominates: sextant reading, horizon quality, vessel motion, timing, dip, index error and atmospheric refraction.
 
-For practical celestial navigation, **SUNSIGHT is already good enough**. A half-minute of arc corresponds to about half a nautical mile in an altitude intercept, and normal real-world errors from the sight itself, the horizon, vessel motion, timing and atmospheric refraction can readily be as large or larger.
+A ten-case 2026-2036 comparison against the displayed USNO Celestial Navigation Data gives:
 
-### 3. SUNSITE2
+| Model | Mean abs GHA diff | Max abs GHA diff | Mean abs Dec diff | Max abs Dec diff |
+|---|---:|---:|---:|---:|
+| Murdoch article code | 0.046′ | 0.103′ | 0.022′ | 0.048′ |
+| SUNSIGHT v1.1 | 0.044′ | 0.145′ | 0.032′ | 0.063′ |
+| **SUNSITE2 v0.1** | **0.038′** | **0.098′** | **0.022′** | **0.042′** |
 
-SUNSITE2 keeps the successful SUNSIGHT sight-reduction framework but replaces its solar ephemeris with a compact subset of **VSOP87D**.
+USNO displays GHA and declination to **0.1′**, so differences of only a few hundredths of an arcminute are at or below the display-resolution floor. The small ten-case set should not be used to claim meaningful superiority between compact algorithms. The broader Swiss Ephemeris test is more useful for distinguishing the models.
 
-Full VSOP87D is far too large for a TI-84 Plus, so SUNSITE2 uses a deliberately severe truncation of the Earth heliocentric series:
-
-- a small set of dominant Earth-longitude terms
-- no Earth-latitude series at marine-navigation precision
-- a minimal Earth–Sun distance model
-- shortened coefficients tested for calculator use
-
-This is **not full VSOP87D**. It is a navigation-specific approximation derived from it.
-
-Development testing indicates that the truncated VSOP87D model reduces solar-position error to roughly the **one-tenth-of-an-arcminute class or better** over the present 1900–2049 test interval. That is considerably more accurate than SUNSIGHT's already adequate Meeus implementation.
-
-The important question is therefore not whether SUNSITE2 can calculate the Sun more accurately. It can.
-
-The question is whether that extra accuracy matters aboard a boat.
-
-For most practical sextant work, **probably not**.
-
-The additional astronomical precision is smaller than many ordinary observational and atmospheric errors. SUNSITE2 is therefore best regarded as an experiment in how much accurate modern ephemeris can be fitted into a plain TI-84 Plus without making the program noticeably slower or much larger.
-
-If you want the fuller history, design decisions, validation work and practical reasoning behind this project, read the [SUNSIGHT repository](https://github.com/robmurray-avant/SUNSIGHT-TI84Plus) in detail first. SUNSITE2 deliberately builds on that work rather than repeating all of it here.
-
-## Accuracy in context: ephemeris versus practical LOP
-
-It is useful to separate two different questions:
-
-1. **How accurately does the method calculate the Sun's position?**
-2. **How accurately will a real sextant sight place the line of position (LOP)?**
-
-One minute of error in calculated altitude corresponds to approximately one nautical mile of intercept error. But once ephemeris error is below a few tenths of an arcminute, the dominant errors in a real marine sight are usually the observation itself: sextant reading, horizon definition, vessel motion, exact timing, index error, dip and atmospheric refraction.
-
-| Method | Ephemeris / solar-position performance | Approximate ephemeris contribution to intercept error | Representative practical accuracy of a good small-boat Sun sight |
-|---|---:|---:|---:|
-| **Murdoch TI-81** | based on a **~1′-class low-precision solar formulation**; individual cases can be substantially better | about **≤1 NM** | roughly **1–2 NM** |
-| **SUNSIGHT** | typically **a few tenths of an arcminute** in the validation set; maximum tested Hc difference about **0.50′** in the modern USNO suite | about **0.2–0.5 NM** | roughly **1–2 NM** |
-| **SUNSITE2** | about **0.02–0.1′** in current numerical testing over **1900–2049**; wider validation is still in progress | about **0.02–0.1 NM** | still roughly **1–2 NM** |
-| **Standard Nautical Almanac method** | hourly Sun GHA and declination tabulated to **0.1′**; **Increments and Corrections** carry GHA to the sight minute/second and **d** interpolates declination | generally about **0.1 NM or less** from the tabular calculation | roughly **1–2 NM** |
-
-The comparison is deliberately approximate. It is intended to show scale, not to imply that every sight will fall inside those bands or that **1–2 NM** is a guaranteed error envelope. A very good observer in settled conditions may do better; rough seas, a poor horizon or low altitude can make the result substantially worse.
-
-**Why the two accuracy columns are so different:** the final LOP contains more than ephemeris error. It also contains observational error from the sextant reading, horizon definition, vessel motion, timing, dip, index error and atmospheric refraction. Once the ephemeris is accurate to a few tenths of an arcminute, those other errors usually dominate.
-
-The standard *Nautical Almanac* remains the authoritative navigational reference. Its hourly Sun GHA and declination are published to **0.1′**. For a sight between whole hours, the navigator uses the **Increments and Corrections** tables to carry GHA to the exact minute and second of UTC and applies the **d correction** to interpolate declination. The tabular method therefore preserves the fine precision needed at the actual sight time rather than limiting the navigator to whole-hour values.
-
-**The practical lesson:** Murdoch's program was already capable of useful marine celestial navigation. SUNSIGHT makes the astronomical calculation appreciably more accurate, to the point that it is normally no longer the dominant source of error. SUNSITE2 reduces the ephemeris error still further, toward or beyond the useful resolution of the standard Nautical Almanac method, but a sextant sight aboard a moving vessel generally cannot exploit most of that additional precision.
-
-That is why **SUNSIGHT is already good enough for practical navigation**, and why SUNSITE2 is best viewed as an experiment in compact ephemeris accuracy rather than a necessary operational upgrade.
+The practical conclusion is straightforward: **SUNSIGHT v1.1 is already more than accurate enough for ordinary marine Sun sights. SUNSITE2 makes the ephemeris still better, but most navigators will not be able to exploit that additional precision through a sextant on a moving boat.**
 
 ## Why VSOP87D?
 
-VSOP stands for **Variations Séculaires des Orbites Planétaires** — literally, *Secular Variations of the Planetary Orbits*. VSOP87 is a modern analytical theory of planetary motion developed by P. Bretagnon and G. Francou. VSOP87D is the version that expresses planetary positions in heliocentric spherical coordinates of date.
+VSOP87 is an analytical theory of planetary motion developed by P. Bretagnon and G. Francou. VSOP87D expresses planetary positions in heliocentric spherical coordinates of date.
 
-For the Sun, SUNSITE2 calculates a truncated heliocentric position of the Earth and then obtains the Sun's geocentric ecliptic longitude by adding 180°.
+For a Sun sight, SUNSITE2 calculates a truncated heliocentric longitude of the Earth, adds 180° to obtain the Sun's geocentric ecliptic longitude, and then applies the same compact apparent-longitude, obliquity, right-ascension, declination and sidereal-time framework used by the program.
 
-The full Earth series contains far more terms than a marine navigator needs. SUNSITE2 deliberately keeps only enough to drive navigational error well below practical sextant accuracy.
+Full VSOP87D is far too large for this job. SUNSITE2 retains only a small set of dominant Earth-longitude terms, a highly compressed L1/L2 treatment, no Earth-latitude series, and a simple Earth-Sun distance approximation.
 
-The result is mathematically excessive for the job, but computationally inexpensive on the TI-84 Plus.
+This is therefore **not full VSOP87D**. It is a navigation-specific approximation derived from VSOP87D and judged by its measured solar-coordinate performance, not by astronomical completeness.
+
+See [docs/vsop87-truncation.md](docs/vsop87-truncation.md).
+
+## Historical line
+
+### Murdoch, 1996
+
+William S. Murdoch's 1996 *Cruising World* article, “Create Your Own Sun-Sight Reduction Program,” showed that a complete Sun ephemeris and sight-reduction system could be fitted into a TI-81. His eight operational programs occupied **2,259 bytes**, with a separate 128-byte diagnostic program.
+
+Murdoch used compact low-precision planetary formulae derived from Van Flandern and Pulkkinen and arranged for practical solar-coordinate calculation by B. Emerson of HM Nautical Almanac Office.
+
+The result remains impressive. When the reconstructed article code is run against the same modern ten-case USNO set used for SUNSIGHT, its displayed-value differences are in roughly the same small fraction-of-an-arcminute class as the later compact methods.
+
+### SUNSIGHT
+
+SUNSIGHT rebuilt the concept for the plain TI-84 Plus with:
+
+- a modern compact solar ephemeris
+- ΔT treatment
+- refined Bennett refraction with entered pressure and temperature
+- semidiameter and parallax
+- clearer data entry
+- numerical safeguards
+- practical warnings
+- hardware and off-calculator validation
+
+Version 1.1 occupies **6,997 bytes** on the calculator and adds eight small longitude terms that materially improve the original v1.0 ephemeris without abandoning its simple structure.
+
+### SUNSITE2
+
+SUNSITE2 asks how far the ephemeris can be pushed while keeping the same sort of plain-calculator program.
+
+The answer so far is: surprisingly far. The current truncated VSOP87D model roughly halves SUNSIGHT v1.1's remaining GHA RMS error for only about 219 additional calculator bytes.
+
+Whether that justifies maintaining a separate operational program is still an open design question.
 
 ## Current supported range
 
-The program currently accepts **1900 through 2049**.
+The current build accepts **1900 through 2049**.
 
-That range is presently limited more by the ΔT implementation and completed validation than by VSOP87D itself. One purpose of this project is to determine how much farther the existing truncated model can be trusted before additional terms or ΔT branches are required.
+This is a tested support range, not a claim that the truncated VSOP terms suddenly fail outside it. The range is limited by the current ΔT branches, the validation programme, and the program's deliberate UTC≈UT1 standalone design.
 
-The year limits will not be widened merely because the calculator accepts the mathematics. They will be widened only after testing establishes a defensible accuracy range.
+SUNSITE2 accepts UTC and treats it as the practical approximation to UT1. It does **not** require DUT1 as an input. The astronomical comparison tables use the same numerical clock time for SUNSITE2 and the reference calculation so that solar-model differences can be examined separately.
 
-## Download and install
+The range should not be widened merely because the calculator can evaluate the formulae.
 
-Use **[SUNSITE2.8xp](SUNSITE2.8xp)** for installation with TI Connect CE.
-
-The human-readable [SUNSITE2.txt](SUNSITE2.txt) is provided for inspection and documentation, not as the preferred installation method.
-
-See [docs/INSTALL.md](docs/INSTALL.md) for details.
-
-Again: **do not use this development build for navigation until the validation programme is complete.**
-
-## Inputs
+## Inputs and outputs
 
 SUNSITE2 asks for:
 
 - date and UTC
 - assumed latitude and longitude
 - sextant altitude Hs
-- lower or upper limb
+- lower or upper Sun limb
 - index error, on or off the arc
 - height of eye in metres
 - atmospheric pressure in mb/hPa
@@ -148,98 +142,92 @@ It returns:
 - intercept in nautical miles, To or From
 - Zn to 0.1°
 
-## Warnings and why they are there
+It also warns for:
 
-SUNSITE2 retains SUNSIGHT's three practical warnings.
+- apparent altitude below 5° — `LOW SUN`
+- corrected altitude above 87° — `SUN NEAR ZENITH`
+- intercept above 25 NM — `REPLOT BETTER DR`
 
-### LOW SUN — apparent altitude below 5°
+## Current development limitations
 
-Refraction becomes rapidly larger and less predictable as altitude falls. The program can calculate a standard correction from the entered pressure and temperature, but the real atmosphere may not behave like the model.
+The current v0.1 calculator build predates the final SUNSIGHT v1.1 review. Several input-validation issues identified during that review also exist in SUNSITE2 and are planned for the next build.
 
-*The American Practical Navigator* (Bowditch) puts the problem plainly:
+In particular, the current source should be hardened so that it:
 
-> “The atmosphere contains many irregularities which are erratic in their influence upon refraction.”
+- accepts only exact discrete choices for limb and hemisphere selections
+- rejects impossible calendar dates rather than allowing the Julian-date formula to normalize them silently
+- validates degrees/minutes components independently
+- rejects a combined Hs above 90°
+- catches obvious pressure, temperature, eye-height and index-error keying mistakes with broad plausibility checks
+- exits without leaving the calculator in `Fix 1`
 
-Bowditch notes that temperature inversions, fronts, squalls, differences between sea and air temperature and layered air can all produce abnormal refraction. Near the horizon, even a mathematically excellent ephemeris cannot remove that uncertainty.
+These are mostly **human-input safeguards**, not ephemeris defects. They are nevertheless important in a program intended for backup navigation.
 
-National Geospatial-Intelligence Agency, *The American Practical Navigator (Bowditch)*, Pub. No. 9, 2024 edition, Vol. II, §605, “Astronomical Refraction,” p. 250. Official publication page: https://msi.nga.mil/Publications/APN
-
-The LOW SUN warning therefore means exactly what it says: the result may still be useful, but it deserves less confidence than a sight taken at a healthier (higher) altitude.
-
-### SUN NEAR ZENITH — corrected altitude above 87°
-
-The near-zenith warning is mainly a geometry and plotting caution, not a refraction warning. As the Sun approaches the zenith, azimuth can change very rapidly and the circle of equal altitude becomes too tightly curved to be represented well by an ordinary straight line of position.
-
-Bowditch states:
-
-> “It is not always easy to determine the azimuth accurately, and when near the zenith, a body may be changing azimuth rapidly.”
-
-It also warns that for a body near the zenith:
-
-> “the use of a straight line to approximate the circle may introduce serious error.”
-
-The current SUNSITE2 threshold of 87° corresponds closely to Bowditch's further guidance that within about three degrees of the zenith the circle of position should be plotted as a circle rather than treated as a straight LOP.
-
-National Geospatial-Intelligence Agency, *The American Practical Navigator (Bowditch)*, Pub. No. 9, 2024 edition, Vol. I, §2011, “High Altitude Sights,” pp. 362–364. Official publication page: [https://msi.nga.mil/Publications/APN](https://msi.nga.mil/Publications/APN)
-
-### INT >25 NM — large intercept
-
-A large intercept does not necessarily mean the celestial calculation is wrong. It usually means the assumed or DR position is a poor centre from which to plot the line of position, or that an input deserves checking.
-
-SUNSITE2 therefore advises:
-
-`REPLOT BETTER DR`
-
-The purpose is practical: use a more suitable assumed position and check the sight data rather than blindly plotting a very large intercept.
-
-These are **navigation cautions, not calculation-error messages**.
+See [docs/next-build-hardening.md](docs/next-build-hardening.md).
 
 ## Physical-calculator validation
 
-The current source and `.8xp` build have been run on a **plain monochrome TI-84 Plus**.
+The current source and the complete 7,275-byte `.8xp` build have been run on a **plain monochrome TI-84 Plus**.
 
-Historical regression status:
+Historical regression results:
 
 - **Case A — PASS:** 11.4 NM To, Zn 282.8°, with expected LOW SUN warning
 - **Case B — PASS:** 24.0 NM To, Zn 5.8°
 - **Case C — PASS:** 13.0 NM To, Zn 89.8°
 - **Case D — PASS:** 0.7 NM From, Zn 234.3°
 
-The historical hardware regression set therefore passes **4/4**.
+See [docs/test-cases.md](docs/test-cases.md).
 
-That is encouraging, but four historical cases are not enough to establish a new ephemeris over an extended date range. Wider numerical testing against high-precision reference data is still in progress.
+## Download and install
 
-See [docs/test-cases.md](docs/test-cases.md) for the full inputs and validation notes.
+Use **[SUNSITE2.8xp](SUNSITE2.8xp)** with TI Connect CE.
+
+Before transfer, the file should be:
+
+- **7,275 bytes**
+- SHA-256 **`daad8997b61b4161bc5d6986ece2da19c7bd47b84fc79982fc522673767bdaea`**
+
+See [docs/INSTALL.md](docs/INSTALL.md).
+
+## Calculator workspace warning
+
+SUNSITE2 uses calculator letter variables **A-Q** and list **L₁** as working storage. Running the program can overwrite values already stored there.
+
+Back up anything important before using SUNSITE2. A dedicated backup-navigation calculator avoids most of this concern.
+
+The program also sets Degree mode while running.
 
 ## Repository contents
 
-- [SUNSITE2.8xp](SUNSITE2.8xp) — tested TI-84 Plus calculator program for transfer with TI Connect CE
-- [SUNSITE2.txt](SUNSITE2.txt) — human-readable TI-BASIC source
-- [docs/INSTALL.md](docs/INSTALL.md) — installation notes
-- [docs/test-cases.md](docs/test-cases.md) — historical validation cases and current hardware status
-- [docs/memory-map.md](docs/memory-map.md) — variable and list allocation
-- [docs/sources.md](docs/sources.md) — astronomical and historical sources
-- [docs/original-cruising-world-1996/README.md](docs/original-cruising-world-1996/README.md) — citation and authorized link to Murdoch's article
-- [CHANGELOG.md](CHANGELOG.md) — development history
-- [LICENSE](LICENSE) — MIT License for SUNSITE2 code
-- [COPYRIGHT.md](COPYRIGHT.md) — repository copyright scope
+- `SUNSITE2.8xp` — physical-calculator-tested TI program
+- `SUNSITE2.txt` — human-readable rendering of the tested program
+- `SHA256SUMS` — checksum for the installable binary
+- `docs/INSTALL.md` — installation and integrity checks
+- `docs/test-cases.md` — hardware and numerical validation
+- `docs/memory-map.md` — variables and `L₁` allocation
+- `docs/sources.md` — calculation references and validation sources
+- `docs/vsop87-truncation.md` — retained VSOP terms and model scope
+- `docs/next-build-hardening.md` — proposed code changes before an operational release
+- `docs/original-cruising-world-1996/` — citation and authorized link for Murdoch's article
+- `CHANGELOG.md` — development history
+- `LICENSE` — MIT License for SUNSITE2 code
+- `COPYRIGHT.md` — repository copyright scope
 
-## Status
+## Development direction
 
-SUNSITE2 is **work in progress**.
+The next useful milestone is not another ephemeris term. The current astronomical model is already comfortably beyond ordinary sextant requirements.
 
-Current priorities are:
+The priorities are:
 
-1. complete a much wider numerical validation of the truncated VSOP87D model
-2. test progressively wider historical and future date ranges
-3. determine a defensible expanded year range
-4. document accuracy against a high-precision reference
-5. decide whether the extra precision offers enough practical benefit to justify maintaining SUNSITE2 separately from SUNSIGHT
+1. harden the input shell using lessons from the SUNSIGHT v1.1 review
+2. generate a new `.8xp` from that source and test the exact binary on hardware
+3. repeat historical A-D and numerical validation
+4. decide whether SUNSITE2 remains an experimental research branch or becomes the ephemeris basis for a future SUNSIGHT v2
+
+Until that work is complete, **SUNSIGHT v1.1 remains the mature program and SUNSITE2 remains experimental**.
 
 ## Disclaimer
 
 This software is an educational and experimental navigation project, not a substitute for experience, education, judgment or independent means of navigation.
 
-A correct calculation cannot compensate for a bad sight, incorrect UTC, a poor assumed position or incorrect input.
-
-Until the wider validation programme is complete, **SUNSITE2 should not be relied upon for navigation**.
+A correct ephemeris cannot compensate for a bad sight, incorrect time, a poor assumed position or incorrect input. Test the software yourself and maintain other independent ways of determining position.

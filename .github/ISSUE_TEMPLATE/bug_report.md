@@ -6,19 +6,33 @@ labels: ""
 assignees: ""
 ---
 
-## SUNSITE2 version
+## SUNSITE2 build
 
-Example: v0.1.0
+Version or commit, if known:
+
+Downloaded `.8xp` file size:
+
+SHA-256, if checked:
 
 ## Calculator
 
 Exact model:
+
+## Installation method
+
+TI Connect CE version, if known:
+
+Did the file transfer without an error? Yes / No
 
 ## Historical regression tests
 
 Case A: Pass / Fail / Not tested
 
 Case B: Pass / Fail / Not tested
+
+Case C: Pass / Fail / Not tested
+
+Case D: Pass / Fail / Not tested
 
 ## Sight inputs
 
@@ -43,4 +57,4 @@ Include intercept, To/From, Zn, warnings or exact error message.
 
 ## Additional details
 
-Describe how the program was installed and anything else that may help reproduce the problem.
+Describe what happened, whether the calculator had prior values in A-Q or L₁, and anything else that may help reproduce the problem.
